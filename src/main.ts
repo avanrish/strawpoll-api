@@ -1,6 +1,7 @@
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
 
 import { AppModule } from './app.module';
 import { logger } from './logging.middleware';
@@ -31,6 +32,8 @@ async function bootstrap() {
     },
   });
 
-  await app.listen(process.env.PORT || 4000);
+  const configService = app.get(ConfigService);
+
+  await app.listen(configService.get('PORT'));
 }
 bootstrap();
