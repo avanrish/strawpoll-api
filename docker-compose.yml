@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  pgDatabase:
+    image: postgres:15.3
+    restart: unless-stopped
+    env_file:
+      - .env.local
+    ports:
+      - "5432:5432"
+    volumes:
+      - strawpoll-db:/var/lib/postgresql/data
+volumes:
+  strawpoll-db:

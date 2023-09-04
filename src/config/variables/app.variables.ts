@@ -1,4 +1,4 @@
-import { Environment } from '../common/enums/environment';
+import { Environment } from '../../common/enums/environment';
 
 export const defaultPort = 4000;
 

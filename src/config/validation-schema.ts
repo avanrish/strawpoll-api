@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 
 import { Environment } from '../common/enums/environment';
-import { defaultPort } from './app.config';
+import { defaultPort } from './variables/app.variables';
 
 export const validationSchema = Joi.object({
   NODE_ENV: Joi.string()
