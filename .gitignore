@@ -36,3 +36,6 @@ lerna-debug.log*
 
 # Environment variables
 .env.local
+
+# Other
+temp
