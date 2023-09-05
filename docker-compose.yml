@@ -10,5 +10,16 @@ services:
       - "5432:5432"
     volumes:
       - strawpoll-db:/var/lib/postgresql/data
+  pgAdmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    volumes:
+      - strawpoll-pgAdmin:/var/lib/pgadmin
 volumes:
   strawpoll-db:
+  strawpoll-pgAdmin:
