@@ -8,13 +8,12 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
+          "type": "serial",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
           "nullable": false,
-          "default": "uuid_generate_v4()",
-          "mappedType": "uuid"
+          "mappedType": "integer"
         },
         "created_at": {
           "name": "created_at",
@@ -36,6 +35,16 @@
           "length": 6,
           "mappedType": "datetime"
         },
+        "public_id": {
+          "name": "public_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "uuid_generate_v4()",
+          "mappedType": "uuid"
+        },
         "title": {
           "name": "title",
           "type": "varchar(255)",
@@ -49,6 +58,15 @@
       "name": "poll",
       "schema": "public",
       "indexes": [
+        {
+          "columnNames": [
+            "public_id"
+          ],
+          "composite": false,
+          "keyName": "poll_public_id_unique",
+          "primary": false,
+          "unique": true
+        },
         {
           "keyName": "poll_pkey",
           "columnNames": [
@@ -104,12 +122,12 @@
         },
         "poll_id": {
           "name": "poll_id",
-          "type": "uuid",
+          "type": "int",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "mappedType": "uuid"
+          "mappedType": "integer"
         }
       },
       "name": "poll_option",

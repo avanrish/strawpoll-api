@@ -1,13 +1,10 @@
-import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, ManyToOne, Property } from '@mikro-orm/core';
 
-import { DateEntity } from '../../common/entities/date.entity';
+import { BaseDateEntity } from '../../common/entities/base-date.entity';
 import { Poll } from './poll.entity';
 
 @Entity()
-export class PollOption extends DateEntity {
-  @PrimaryKey()
-  id!: number;
-
+export class PollOption extends BaseDateEntity {
   @Property()
   title!: string;
 

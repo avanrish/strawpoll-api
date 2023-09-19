@@ -2,17 +2,18 @@ import {
   Collection,
   Entity,
   OneToMany,
-  PrimaryKey,
   Property,
+  Unique,
 } from '@mikro-orm/core';
 
-import { DateEntity } from '../../common/entities/date.entity';
+import { BaseDateEntity } from '../../common/entities/base-date.entity';
 import { PollOption } from './poll-option.entity';
 
 @Entity()
-export class Poll extends DateEntity {
-  @PrimaryKey({ type: 'uuid', defaultRaw: 'uuid_generate_v4()' })
-  id!: string;
+export class Poll extends BaseDateEntity {
+  @Property({ type: 'uuid', defaultRaw: 'uuid_generate_v4()' })
+  @Unique()
+  publicId!: string;
 
   @Property()
   title!: string;
