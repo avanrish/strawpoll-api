@@ -9,6 +9,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
       - strawpoll-db:/var/lib/postgresql/data
   pgAdmin:
     image: dpage/pgadmin4
