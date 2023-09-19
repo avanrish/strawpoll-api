@@ -6,6 +6,7 @@ import { MikroORM } from '@mikro-orm/core';
 
 import { AppModule } from './app.module';
 import { logger } from './logging.middleware';
+import { AppConfig } from './config/types';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
@@ -33,7 +34,7 @@ async function bootstrap() {
     },
   });
 
-  const configService = app.get(ConfigService);
+  const configService: ConfigService<AppConfig> = app.get(ConfigService);
   const orm = app.get(MikroORM);
   await orm.migrator.up();
 
