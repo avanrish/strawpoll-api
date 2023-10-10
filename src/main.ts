@@ -1,5 +1,5 @@
-import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
-import { NestFactory, Reflector } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { MikroORM } from '@mikro-orm/core';
@@ -15,9 +15,12 @@ async function bootstrap() {
     exclude: [''],
   });
   app.useGlobalPipes(
-    new ValidationPipe({ whitelist: true, stopAtFirstError: true }),
+    new ValidationPipe({
+      whitelist: true,
+      stopAtFirstError: true,
+      transform: true,
+    }),
   );
-  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.use(logger);
 
   const config = new DocumentBuilder()
@@ -40,4 +43,6 @@ async function bootstrap() {
 
   await app.listen(configService.get('port'));
 }
-bootstrap();
+bootstrap().catch((err) => {
+  console.log(err);
+});
