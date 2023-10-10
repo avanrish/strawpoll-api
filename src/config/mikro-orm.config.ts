@@ -4,8 +4,9 @@ import { TSMigrationGenerator } from '@mikro-orm/migrations';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs';
 
 import { getConfig } from './app.config';
+import { Environment } from '../common/enums/environment';
 
-const { db } = getConfig();
+const { db, env } = getConfig();
 
 const mikroOrmOptions: MikroOrmModuleSyncOptions = {
   metadataProvider: TsMorphMetadataProvider,
@@ -17,10 +18,16 @@ const mikroOrmOptions: MikroOrmModuleSyncOptions = {
   user: db.user,
   password: db.password,
   dbName: db.name,
+  driverOptions: {
+    connection: {
+      ssl: env === Environment.Local ? false : { ca: db.cert },
+    },
+  },
   migrations: {
     path: 'dist/migrations',
     pathTs: 'src/migrations',
     generator: TSMigrationGenerator,
+    disableForeignKeys: false,
   },
 };
 

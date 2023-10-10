@@ -11,5 +11,6 @@ export const appConfigSchema = z.object({
     name: z.string().nonempty(),
     port: z.number().int().positive(),
     host: z.string().nonempty(),
+    cert: z.string().optional(),
   }),
 });
