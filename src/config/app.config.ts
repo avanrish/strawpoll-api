@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import { Environment } from '../common/enums/environment';
 import { AppConfig } from './types';
 import { appConfigSchema } from './app-config-schema';
