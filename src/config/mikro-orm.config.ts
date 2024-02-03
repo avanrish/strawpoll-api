@@ -1,6 +1,6 @@
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
-import { TSMigrationGenerator } from '@mikro-orm/migrations';
+import { TSMigrationGenerator, Migrator } from '@mikro-orm/migrations';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs';
 
 import { getConfig } from './app.config';
@@ -23,6 +23,7 @@ const mikroOrmOptions: MikroOrmModuleSyncOptions = {
       ssl: env === Environment.Local ? false : { ca: db.cert },
     },
   },
+  extensions: [Migrator],
   migrations: {
     path: 'dist/migrations',
     pathTs: 'src/migrations',
