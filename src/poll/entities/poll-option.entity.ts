@@ -8,7 +8,7 @@ import {
 
 import { BaseDateEntity } from '../../common/entities/base-date.entity';
 import { Poll } from './poll.entity';
-import { PolLVote } from './poll-vote.entity';
+import { PollVote } from './poll-vote.entity';
 
 @Entity()
 export class PollOption extends BaseDateEntity {
@@ -18,6 +18,6 @@ export class PollOption extends BaseDateEntity {
   @ManyToOne()
   poll!: Poll;
 
-  @OneToMany(() => PolLVote, (vote) => vote.option)
-  votes = new Collection<PolLVote>(this);
+  @OneToMany(() => PollVote, (vote) => vote.option)
+  votes = new Collection<PollVote>(this);
 }
