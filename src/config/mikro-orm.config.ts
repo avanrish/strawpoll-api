@@ -20,7 +20,7 @@ const mikroOrmOptions: MikroOrmModuleSyncOptions = {
   dbName: db.name,
   driverOptions: {
     connection: {
-      ssl: env === Environment.Local ? false : { ca: db.cert },
+      ssl: env === Environment.LOCAL ? false : { ca: db.cert },
     },
   },
   extensions: [Migrator],
