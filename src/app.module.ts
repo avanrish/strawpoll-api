@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 
 import { AppController } from './app.controller';
-import { PollModule } from './poll/poll.module';
+import { PollsModule } from './polls/polls.module';
 import { getConfig } from './config/app.config';
 
 @Module({
@@ -13,7 +13,7 @@ import { getConfig } from './config/app.config';
       load: [getConfig],
     }),
     MikroOrmModule.forRoot(),
-    PollModule,
+    PollsModule,
   ],
   controllers: [AppController],
 })
