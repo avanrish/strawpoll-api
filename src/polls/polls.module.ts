@@ -10,5 +10,6 @@ import { Poll } from './entities/poll.entity';
   imports: [MikroOrmModule.forFeature([Poll, PollOption])],
   controllers: [PollsController],
   providers: [PollsService],
+  exports: [PollsService],
 })
 export class PollsModule {}

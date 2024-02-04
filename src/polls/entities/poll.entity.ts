@@ -9,6 +9,7 @@ import {
 
 import { BaseDateEntity } from '../../common/entities/base-date.entity';
 import { PollOption } from './poll-option.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Poll extends BaseDateEntity {
@@ -22,7 +23,8 @@ export class Poll extends BaseDateEntity {
   @Enum(() => PollType)
   type!: PollType;
 
-  @OneToMany(() => PollOption, (option) => option.poll)
+  @ApiProperty({ type: PollOption, example: PollOption.example })
+  @OneToMany(() => PollOption, (option) => option.poll, { eager: true })
   options = new Collection<PollOption>(this);
 }
 
