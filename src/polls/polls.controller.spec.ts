@@ -6,6 +6,9 @@ import { PollsController } from './polls.controller';
 import { PollsService } from './polls.service';
 import { Poll, PollType } from './entities/poll.entity';
 import mikroOrmConfig from '../config/mikro-orm.config';
+import { getConfig } from '../config/app.config';
+
+const { db } = getConfig();
 
 describe('PollsController', () => {
   let controller: PollsController;
@@ -16,7 +19,7 @@ describe('PollsController', () => {
       imports: [
         MikroOrmModule.forRoot({
           ...mikroOrmConfig,
-          dbName: 'strawpoll-mikro-test-db',
+          dbName: db.testDbName,
           allowGlobalContext: true,
         }),
         MikroOrmModule.forFeature({ entities: [Poll] }),

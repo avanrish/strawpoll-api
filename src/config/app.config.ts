@@ -17,5 +17,6 @@ export const getConfig = (): AppConfig =>
       port: parseInt(process.env.POSTGRES_PORT, 10),
       host: process.env.POSTGRES_HOST,
       cert: process.env.POSTGRES_CERT,
+      testDbName: 'strawpoll-mikro-test-db',
     },
   });
