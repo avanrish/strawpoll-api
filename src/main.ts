@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
@@ -10,9 +10,9 @@ import { AppConfig } from './config/types';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
-
-  app.setGlobalPrefix('v1', {
-    exclude: [''],
+  app.enableVersioning({
+    type: VersioningType.URI,
+    defaultVersion: '1',
   });
   app.useGlobalPipes(
     new ValidationPipe({
@@ -22,7 +22,6 @@ async function bootstrap() {
     }),
   );
   app.use(logger);
-
   const config = new DocumentBuilder()
     .setTitle('StrawPoll')
     .setDescription('StrawPoll API')
@@ -36,11 +35,9 @@ async function bootstrap() {
       operationsSorter: 'alpha',
     },
   });
-
   const configService: ConfigService<AppConfig> = app.get(ConfigService);
   const orm = app.get(MikroORM);
   await orm.migrator.up();
-
   await app.listen(configService.get('port'));
 }
 bootstrap().catch((err) => {
