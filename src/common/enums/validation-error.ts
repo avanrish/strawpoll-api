@@ -7,4 +7,6 @@ export enum ValidationError {
   OptionsOptionInvalid = 'options.option.invalid',
   OptionsOptionMaxLength = 'options.option.maxLength',
   OptionsOptionRequired = 'options.option.required',
+  OptionIdsRequired = 'optionIds.required',
+  OptionIdsOnlyIntegers = 'optionIds.onlyIntegers',
 }
