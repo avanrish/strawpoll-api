@@ -1,73 +1,63 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# StrawPoll
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This project is the backend for a clone of StrawPoll.com, designed to work in tandem with the [frontend application](https://github.com/avanrish/strawpoll-web). It is built using NestJS and leverages MikroORM for database interactions.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- REST API endpoints to manage polls and votes.
+- Integration with PostgreSQL using MikroORM.
+- Docker support for easy setup and deployment.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Prerequisites
 
-## Installation
+- [Docker](https://www.docker.com/) (recommended for installation).
+- Node.js (if not using Docker).
+- A PostgreSQL database (if not using Docker).
 
-```bash
-$ pnpm install
-```
+## Installation and Setup
 
-## Running the app
+### Using Docker (Recommended)
 
-```bash
-# development
-$ pnpm run start
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/avanrish/strawpoll-api
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd strawpoll-api
+   ```
+3. Rename `.env.example` to `.env` and adjust the environment variables as needed.
+4. Start the services using Docker Compose:
+   ```bash
+   docker-compose up -d
+   ```
 
-# watch mode
-$ pnpm run start:dev
+### Without Docker
 
-# production mode
-$ pnpm run start:prod
-```
+1. Ensure you have a running instance of PostgreSQL.
+2. Rename `.env.example` to `.env` and set `POSTGRES_HOST` to your database host (e.g., `localhost`).
+3. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+   You can also use `npm` or `yarn`.
+4. Build the application:
+   ```bash
+   pnpm build
+   ```
+5. Start the application:
+   ```bash
+   pnpm start
+   ```
 
-## Test
+## Usage
 
-```bash
-# unit tests
-$ pnpm run test
+Once the backend is up and running, you can start using the API endpoints. The OpenAPI (Swagger) documentation is available at `http://localhost:4000/docs/api`, providing a detailed description of available endpoints and their usage.
 
-# e2e tests
-$ pnpm run test:e2e
+## Frontend Integration
 
-# test coverage
-$ pnpm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+This backend is designed to work with a corresponding frontend application. Please set up the frontend from [this repository](https://github.com/avanrish/strawpoll-web) to fully utilize the functionality of the StrawPoll clone.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+[MIT](LICENSE.md)
