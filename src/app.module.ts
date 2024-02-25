@@ -5,6 +5,7 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { AppController } from './app.controller';
 import { PollsModule } from './polls/polls.module';
 import { getConfig } from './config/app.config';
+import { GatewayModule } from './gateway/gateway.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { getConfig } from './config/app.config';
     }),
     MikroOrmModule.forRoot(),
     PollsModule,
+    GatewayModule,
   ],
   controllers: [AppController],
 })

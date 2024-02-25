@@ -7,10 +7,12 @@ import { CreatePollDto } from './dto/create-poll.dto';
 import { Error } from '../common/enums/error';
 import { PollOption } from './entities/poll-option.entity';
 import { PollVote } from './entities/poll-vote.entity';
+import { Gateway } from '../gateway/gateway';
 
 @Injectable()
 export class PollsService {
   constructor(
+    private readonly gateway: Gateway,
     @InjectRepository(Poll)
     private readonly pollRepository: EntityRepository<Poll>,
   ) {}
@@ -30,6 +32,11 @@ export class PollsService {
       {
         populate: ['options', 'options.votes'],
         failHandler: () => new NotFoundException([Error.PollNotFound]),
+        orderBy: {
+          options: {
+            id: 'asc',
+          },
+        },
       },
     );
   }
@@ -59,5 +66,9 @@ export class PollsService {
       vote.ipAddress = ip;
       option.votes.add(vote);
     });
+  }
+
+  publishVote(poll: Poll) {
+    this.gateway.server.emit('votes', poll.options.toJSON());
   }
 }

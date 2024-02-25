@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   ConflictException,
   Controller,
@@ -13,12 +12,11 @@ import { RealIP } from 'nestjs-real-ip';
 
 import { PollsService } from './polls.service';
 import { CreatePollDto } from './dto/create-poll.dto';
-import { Poll, PollType } from './entities/poll.entity';
+import { Poll } from './entities/poll.entity';
 import { ResultDto } from '../common/dto/result.dto';
 import { ApiResult } from '../common/decorators/api-result';
 import { VoteDto } from './dto/vote.dto';
 import { Error } from '../common/enums/error';
-import { PollOption } from './entities/poll-option.entity';
 
 @ApiTags('polls')
 @Controller('polls')
@@ -55,6 +53,7 @@ export class PollsController {
     if (hasVoted) throw new ConflictException([Error.AlreadyVoted]);
     this.pollsService.vote(poll, dto.optionIds, ip);
     await this.em.flush();
+    this.pollsService.publishVote(poll);
     return { result: poll };
   }
 }
